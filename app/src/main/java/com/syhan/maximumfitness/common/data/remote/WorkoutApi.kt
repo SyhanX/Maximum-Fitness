@@ -7,7 +7,7 @@ import retrofit2.http.GET
 import retrofit2.http.Query
 
 
-interface WorkoutsApi {
+interface WorkoutApi {
 
     @GET("/get_workouts")
     suspend fun getWorkouts() : Response<WorkoutList>
