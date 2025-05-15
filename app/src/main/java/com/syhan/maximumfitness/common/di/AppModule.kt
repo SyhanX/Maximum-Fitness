@@ -3,7 +3,7 @@ package com.syhan.maximumfitness.common.di
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
 import com.syhan.maximumfitness.common.data.remote.WorkoutApi
 import com.syhan.maximumfitness.common.data.repository.WorkoutRepositoryImpl
-import com.syhan.maximumfitness.feature_exercises.domain.repository.WorkoutRepository
+import com.syhan.maximumfitness.feature_workouts.domain.repository.WorkoutRepository
 import kotlinx.serialization.json.Json
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.OkHttpClient

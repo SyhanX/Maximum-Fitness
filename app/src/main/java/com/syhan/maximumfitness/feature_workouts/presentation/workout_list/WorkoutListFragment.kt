@@ -1,4 +1,4 @@
-package com.syhan.maximumfitness.feature_exercises.presentation.exercise_list
+package com.syhan.maximumfitness.feature_workouts.presentation.workout_list
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -7,11 +7,11 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.syhan.maximumfitness.R
-import com.syhan.maximumfitness.databinding.FragmentExerciseListBinding
+import com.syhan.maximumfitness.databinding.FragmentWorkoutListBinding
 
-class ExerciseListFragment : Fragment() {
+class WorkoutListFragment : Fragment() {
 
-    private var _binding: FragmentExerciseListBinding? = null
+    private var _binding: FragmentWorkoutListBinding? = null
     private val binding get() = _binding!!
 
     override fun onCreateView(
@@ -19,7 +19,7 @@ class ExerciseListFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
 
-        _binding = FragmentExerciseListBinding.inflate(inflater, container, false)
+        _binding = FragmentWorkoutListBinding.inflate(inflater, container, false)
         return binding.root
 
     }

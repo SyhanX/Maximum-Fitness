@@ -1,10 +1,7 @@
 package com.syhan.maximumfitness.common.data.repository
 
 import com.syhan.maximumfitness.common.data.remote.WorkoutApi
-import com.syhan.maximumfitness.feature_exercises.domain.model.WorkoutList
-import com.syhan.maximumfitness.feature_exercises.domain.model.WorkoutVideo
-import com.syhan.maximumfitness.feature_exercises.domain.repository.WorkoutRepository
-import retrofit2.Response
+import com.syhan.maximumfitness.feature_workouts.domain.repository.WorkoutRepository
 
 class WorkoutRepositoryImpl(
     private val api: WorkoutApi

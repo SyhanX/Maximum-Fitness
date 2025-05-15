@@ -1,4 +1,4 @@
-package com.syhan.maximumfitness.feature_exercises.domain.model
+package com.syhan.maximumfitness.feature_workouts.domain.model
 
 import kotlinx.serialization.Serializable
 

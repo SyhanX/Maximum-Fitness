@@ -7,9 +7,9 @@
 
     <fragment
         android:id="@+id/FirstFragment"
-        android:name="com.syhan.maximumfitness.feature_exercises.presentation.exercise_list.ExerciseListFragment"
+        android:name="com.syhan.maximumfitness.feature_workouts.presentation.workout_list.WorkoutListFragment"
         android:label="@string/first_fragment_label"
-        tools:layout="@layout/fragment_exercise_list">
+        tools:layout="@layout/fragment_workout_list">
 
         <action
             android:id="@+id/action_FirstFragment_to_SecondFragment"
@@ -17,9 +17,9 @@
     </fragment>
     <fragment
         android:id="@+id/SecondFragment"
-        android:name="com.syhan.maximumfitness.feature_exercises.presentation.exercise_details.ExerciseDetailsFragment"
+        android:name="com.syhan.maximumfitness.feature_workouts.presentation.workout_details.WorkoutDetailsFragment"
         android:label="@string/second_fragment_label"
-        tools:layout="@layout/fragment_exercise_details">
+        tools:layout="@layout/fragment_workout_details">
 
         <action
             android:id="@+id/action_SecondFragment_to_FirstFragment"
