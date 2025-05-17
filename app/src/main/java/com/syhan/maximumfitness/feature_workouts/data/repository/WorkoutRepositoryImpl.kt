@@ -1,4 +1,4 @@
-package com.syhan.maximumfitness.common.data.repository
+package com.syhan.maximumfitness.feature_workouts.data.repository
 
 import com.syhan.maximumfitness.common.data.remote.WorkoutApi
 import com.syhan.maximumfitness.feature_workouts.domain.repository.WorkoutRepository
