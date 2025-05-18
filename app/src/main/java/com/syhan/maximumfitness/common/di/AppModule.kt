@@ -2,15 +2,16 @@ package com.syhan.maximumfitness.common.di
 
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
 import com.syhan.maximumfitness.common.data.remote.WorkoutApi
-import com.syhan.maximumfitness.common.data.repository.WorkoutRepositoryImpl
+import com.syhan.maximumfitness.feature_workouts.data.repository.WorkoutRepositoryImpl
 import com.syhan.maximumfitness.feature_workouts.domain.repository.WorkoutRepository
+import com.syhan.maximumfitness.feature_workouts.presentation.workout_list.WorkoutListViewModel
 import kotlinx.serialization.json.Json
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
+import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 import retrofit2.Retrofit
-import kotlin.jvm.java
 
 val appModule = module {
     single {
@@ -21,7 +22,7 @@ val appModule = module {
             .build()
 
         Retrofit.Builder()
-            .baseUrl("https://pokeapi.co")
+            .baseUrl("https://ref.test.kolsa.ru/")
             .client(client)
             .addConverterFactory(Json.asConverterFactory("application/json".toMediaType()))
             .build()
@@ -30,5 +31,9 @@ val appModule = module {
 
     single<WorkoutRepository> {
         WorkoutRepositoryImpl(get())
+    }
+
+    viewModel {
+        WorkoutListViewModel(get())
     }
 }
