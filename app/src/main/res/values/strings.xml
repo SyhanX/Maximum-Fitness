@@ -2,4 +2,13 @@
     <string name="app_name">MaximumFitness</string>
     <string name="workout_list_label">Тренировки</string>
     <string name="workout_details_label">Placeholder</string>
+    <string name="no_description">Без описания</string>
+    <string name="minute_singular_nominative_case">%1$d минута</string>
+    <string name="minute_singular_genitive_case">%1$d минуты</string>
+    <string name="minutes_plural_genitive_case">%1$d минут</string>
+    <string name="unknown_duration">неизвестно</string>
+    <string name="exercise_type_1">Тренировка</string>
+    <string name="exercise_type_2">Эфир</string>
+    <string name="exercise_type_3">Комплекс</string>
+
 </resources>
