@@ -5,6 +5,7 @@ data class WorkoutCardState(
     val title: String = "",
     val description: String? = null,
     val type: Int = 0,
-    val duration: String = "Unknown",
-    val onClick: (id: Int) -> Unit = {}
+    val duration: Int = -1,
+    val onClick: (id: Int) -> Unit = {},
+    val onExpandDescriptionClick: (isExpanded: Boolean) -> Unit = {}
 )

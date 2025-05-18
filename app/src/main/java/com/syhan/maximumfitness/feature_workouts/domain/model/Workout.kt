@@ -11,6 +11,9 @@ import kotlinx.serialization.encoding.Encoder
 import kotlinx.serialization.json.JsonDecoder
 import kotlinx.serialization.json.JsonPrimitive
 
+
+private const val TAG = "Workout"
+
 @Serializable
 data class Workout(
     val id: Int,
@@ -18,32 +21,37 @@ data class Workout(
     val description: String?,
     val type: Int,
     @Serializable(with = WorkoutDurationSerializer::class)
-    val duration: String
+    val duration: Int?
 )
 
-object WorkoutDurationSerializer : KSerializer<String> {
+object WorkoutDurationSerializer : KSerializer<Int?> {
     override val descriptor: SerialDescriptor = PrimitiveSerialDescriptor(
         serialName = "duration",
         PrimitiveKind.STRING
     )
 
-    override fun serialize(encoder: Encoder, value: String) {
-        encoder.encodeString(value)
+    override fun serialize(encoder: Encoder, value: Int?) {
+        encoder.encodeInt(value ?: -1)
     }
 
-    override fun deserialize(decoder: Decoder): String {
-        var duration: String? = null
+    override fun deserialize(decoder: Decoder): Int? {
+        var duration: Int? = null
 
         val jsonDecoder = decoder as? JsonDecoder ?: throw SerializationException(
             "This serializer only works with JSON :3"
         )
         val element = jsonDecoder.decodeJsonElement()
 
-        duration = if (element is JsonPrimitive && element.isString) {
-            element.content
-        } else if (element is JsonPrimitive && !element.isString) {
-            element.content.toString()
-        } else throw SerializationException("Invalid value $element")
+        duration = try {
+            if (element is JsonPrimitive) {
+                element.content
+                    .toString()
+                    .toInt()
+            } else throw SerializationException("Invalid value $element")
+        } catch (e: Exception) {
+            e.printStackTrace()
+            null
+        }
 
         return duration
     }
