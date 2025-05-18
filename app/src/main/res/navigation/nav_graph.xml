@@ -3,26 +3,26 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/FirstFragment">
+    app:startDestination="@id/WorkoutListFragment">
 
     <fragment
-        android:id="@+id/FirstFragment"
+        android:id="@+id/WorkoutListFragment"
         android:name="com.syhan.maximumfitness.feature_workouts.presentation.workout_list.WorkoutListFragment"
-        android:label="@string/first_fragment_label"
+        android:label="@string/workout_list_label"
         tools:layout="@layout/fragment_workout_list">
 
         <action
-            android:id="@+id/action_FirstFragment_to_SecondFragment"
-            app:destination="@id/SecondFragment" />
+            android:id="@+id/action_WorkoutListFragment_to_WorkoutDetailsFragment"
+            app:destination="@id/WorkoutDetailsFragment" />
     </fragment>
     <fragment
-        android:id="@+id/SecondFragment"
+        android:id="@+id/WorkoutDetailsFragment"
         android:name="com.syhan.maximumfitness.feature_workouts.presentation.workout_details.WorkoutDetailsFragment"
-        android:label="@string/second_fragment_label"
+        android:label="@string/workout_details_label"
         tools:layout="@layout/fragment_workout_details">
 
         <action
-            android:id="@+id/action_SecondFragment_to_FirstFragment"
-            app:destination="@id/FirstFragment" />
+            android:id="@+id/action_WorkoutDetailsFragment_to_WorkoutListFragment"
+            app:destination="@id/WorkoutListFragment" />
     </fragment>
 </navigation>
