@@ -7,5 +7,4 @@ data class WorkoutCardState(
     val type: Int = 0,
     val duration: Int = -1,
     val onClick: (id: Int) -> Unit = {},
-    val onExpandDescriptionClick: (isExpanded: Boolean) -> Unit = {}
 )

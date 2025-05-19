@@ -53,9 +53,6 @@ class WorkoutListViewModel(
                             onClick = {
                                 // TODO: doo doo doo doo waaaaaahhhhh
                             },
-                            onExpandDescriptionClick = {
-                                // TODO
-                            }
                         )
                     }
                 )

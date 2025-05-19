@@ -9,6 +9,7 @@
     app:cardCornerRadius="24dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cardConstraintLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:padding="16dp">
@@ -16,74 +17,69 @@
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/title"
             android:layout_width="0dp"
+            android:layout_marginTop="8dp"
             android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
             android:maxLines="2"
-            android:textStyle="bold"
+            android:textFontWeight="600"
             android:textSize="20sp"
-            app:layout_constraintEnd_toStartOf="@id/duration_row"
+            app:layout_constraintEnd_toStartOf="@id/type"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="Title" />
 
-        <LinearLayout
-            android:id="@+id/duration_row"
+        <com.google.android.material.chip.Chip
+            android:id="@+id/type"
+            app:chipStrokeWidth="0dp"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
+            android:layout_height="48dp"
+            android:clickable="false"
+            app:chipCornerRadius="16dp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Комплекс" />
+
+
+        <LinearLayout
+            android:id="@+id/additional_info"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:alpha="0.9"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/type">
 
             <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:id="@+id/duration_icon"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
                 android:layout_marginEnd="6dp"
                 android:importantForAccessibility="no"
                 android:src="@drawable/ic_time"
-                app:tint="?attr/colorOnSecondaryContainer" />
+                app:tint="?attr/colorOnSurface" />
 
             <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/duration"
+                android:id="@+id/duration_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textFontWeight="500"
                 android:textSize="18sp"
                 tools:text="Duration" />
         </LinearLayout>
 
         <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/type"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:paddingBottom="8dp"
-            android:paddingTop="8dp"
-            android:textSize="18sp"
-            android:alpha="0.9"
-            app:layout_constraintBottom_toTopOf="@id/description"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/title"
-            tools:text="Type" />
-
-        <com.google.android.material.textview.MaterialTextView
             android:id="@+id/description"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:ellipsize="end"
-            android:maxLines="2"
+            android:layout_marginTop="16dp"
             android:textSize="18sp"
-            app:layout_constraintBottom_toBottomOf="@id/expandDescriptionButton"
-            app:layout_constraintEnd_toStartOf="@+id/expandDescriptionButton"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/type"
-            tools:text="Description" />
-
-        <Button
-            android:id="@+id/expandDescriptionButton"
-            style="@style/Widget.Material3.Button.IconButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:importantForAccessibility="no"
-            app:icon="@drawable/ic_arrow_down"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@id/description" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/additional_info"
+            tools:text="Описание \nОписание\n Описание" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </com.google.android.material.card.MaterialCardView>

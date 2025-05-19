@@ -12,6 +12,8 @@ import com.syhan.maximumfitness.feature_workouts.data.WorkoutType
 import com.syhan.maximumfitness.feature_workouts.data.getMinutesDeclension
 import com.syhan.maximumfitness.feature_workouts.presentation.workout_list.state.WorkoutCardState
 
+private const val TAG = "WorkoutListAdapter"
+
 class WorkoutListAdapter : ListAdapter<WorkoutCardState, WorkoutListAdapter.WorkoutStateViewHolder>(
     WorkoutListDiffCallback
 ) {
@@ -20,28 +22,28 @@ class WorkoutListAdapter : ListAdapter<WorkoutCardState, WorkoutListAdapter.Work
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind(item: WorkoutCardState) {
+            val currentTypeIndex = WorkoutType.entries[item.type -1]
             binding.apply {
+                val resources = root.resources
+
                 title.text = item.title
+                type.text = resources.getString(currentTypeIndex.typeName)
+                description.text = item.description ?: resources.getString(R.string.no_description)
 
-                type.text = root.resources.getString(
-                    WorkoutType.entries[item.type -1].typeName
-                )
-
-                description.text = item.description
-                    ?: root.resources.getString(R.string.no_description)
-
-                durationRow.visibility = if (item.duration == -1) View.GONE else View.VISIBLE
-
-                duration.text = root.resources.getString(
-                    getMinutesDeclension(item.duration),
-                    item.duration
-                )
-
-                expandDescriptionButton.setOnClickListener {
-
+                if (item.duration == -1) {
+                    durationIcon.visibility = View.GONE
+                    durationText.visibility = View.GONE
+                } else {
+                    durationText.text = resources.getString(
+                        getMinutesDeclension(item.duration),
+                        item.duration
+                    )
                 }
-                root.setOnClickListener {
+                type.setChipBackgroundColorResource(currentTypeIndex.typeColor)
+                type.setTextColor(root.context.getColor(currentTypeIndex.textColor))
 
+                root.setOnClickListener {
+                    item.onClick(item.id)
                 }
             }
         }

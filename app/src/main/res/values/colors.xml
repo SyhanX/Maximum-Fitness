@@ -47,4 +47,11 @@
     <color name="md_theme_surfaceContainer">#FCEAE8</color>
     <color name="md_theme_surfaceContainerHigh">#F6E4E2</color>
     <color name="md_theme_surfaceContainerHighest">#F1DEDC</color>
+
+    <color name="colorExercise">#c1efaf</color>
+    <color name="colorAether">#a3f2d6</color>
+    <color name="colorComplex">#ffdadb</color>
+    <color name="onColorExercise">#294f20</color>
+    <color name="onColorAether">#00513f</color>
+    <color name="onColorComplex">#723339</color>
 </resources>
