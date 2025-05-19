@@ -3,6 +3,7 @@ package com.syhan.maximumfitness.feature_workouts.presentation.workout_list
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -41,10 +42,6 @@ class WorkoutListAdapter : ListAdapter<WorkoutCardState, WorkoutListAdapter.Work
                 }
                 type.setChipBackgroundColorResource(currentTypeIndex.typeColor)
                 type.setTextColor(root.context.getColor(currentTypeIndex.textColor))
-
-                root.setOnClickListener {
-                    item.onClick(item.id)
-                }
             }
         }
     }
@@ -63,6 +60,11 @@ class WorkoutListAdapter : ListAdapter<WorkoutCardState, WorkoutListAdapter.Work
     ) {
         val item = currentList[position]
         holder.bind(item)
+
+        holder.binding.root.setOnClickListener {
+            val action = WorkoutListFragmentDirections.actionWorkoutListFragmentToWorkoutDetailsFragment(item.id)
+            holder.itemView.findNavController().navigate(action)
+        }
     }
 }
 

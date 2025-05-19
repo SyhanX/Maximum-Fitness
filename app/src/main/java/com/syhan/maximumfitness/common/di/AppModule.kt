@@ -4,12 +4,14 @@ import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFact
 import com.syhan.maximumfitness.common.data.remote.WorkoutApi
 import com.syhan.maximumfitness.feature_workouts.data.repository.WorkoutRepositoryImpl
 import com.syhan.maximumfitness.feature_workouts.domain.repository.WorkoutRepository
+import com.syhan.maximumfitness.feature_workouts.presentation.workout_details.WorkoutDetailsViewModel
 import com.syhan.maximumfitness.feature_workouts.presentation.workout_list.WorkoutListViewModel
 import kotlinx.serialization.json.Json
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import org.koin.androidx.viewmodel.dsl.viewModel
+import org.koin.androidx.viewmodel.dsl.viewModelOf
 import org.koin.dsl.module
 import retrofit2.Retrofit
 
@@ -36,4 +38,6 @@ val appModule = module {
     viewModel {
         WorkoutListViewModel(get())
     }
+
+    viewModelOf(::WorkoutDetailsViewModel)
 }
