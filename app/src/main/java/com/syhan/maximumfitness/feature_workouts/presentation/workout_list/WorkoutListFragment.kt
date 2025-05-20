@@ -63,6 +63,9 @@ class WorkoutListFragment : Fragment() {
                                 } else {
                                     getString(R.string.unexpected_error)
                                 }
+                            errorMessage.retryBtn.setOnClickListener {
+                                viewModel::retryLoadingWorkoutList
+                            }
                         }
 
                         NetworkRequestUiState.Success -> {

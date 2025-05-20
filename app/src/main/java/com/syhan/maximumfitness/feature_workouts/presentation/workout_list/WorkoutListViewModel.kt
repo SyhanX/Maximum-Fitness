@@ -1,6 +1,5 @@
 package com.syhan.maximumfitness.feature_workouts.presentation.workout_list
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.syhan.maximumfitness.common.data.EmptyHttpBodyException
@@ -34,6 +33,10 @@ class WorkoutListViewModel(
         loadWorkoutList()
     }
 
+    fun retryLoadingWorkoutList() {
+        loadWorkoutList()
+    }
+
     private fun loadWorkoutList() {
         viewModelScope.launch(Dispatchers.IO) {
             _networkUiState.setLoading()
@@ -50,9 +53,6 @@ class WorkoutListViewModel(
                             description = it.description,
                             type = it.type,
                             duration = it.duration ?: -1,
-                            onClick = {
-                                // TODO: doo doo doo doo waaaaaahhhhh
-                            },
                         )
                     }
                 )
@@ -62,7 +62,6 @@ class WorkoutListViewModel(
             } catch (e: Exception) {
                 _networkUiState.setError(ErrorType.UnexpectedHttpException, e.message)
             }
-            Log.d(TAG, "loadWorkoutList: ${listState.value.list.map { it.duration }}")
         }
     }
 }
