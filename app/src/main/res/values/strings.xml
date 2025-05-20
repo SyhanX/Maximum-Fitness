@@ -10,5 +10,8 @@
     <string name="exercise_type_1">Тренировка</string>
     <string name="exercise_type_2">Эфир</string>
     <string name="exercise_type_3">Комплекс</string>
+    <string name="update">Обновить</string>
+    <string name="unexpected_error">Что-то пошло не так\n</string>
+    <string name="no_connection_error">Нет интернета</string>
 
 </resources>
