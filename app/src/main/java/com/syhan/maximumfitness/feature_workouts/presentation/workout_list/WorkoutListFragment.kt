@@ -1,7 +1,6 @@
 package com.syhan.maximumfitness.feature_workouts.presentation.workout_list
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,7 +8,11 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.syhan.maximumfitness.R
+import com.syhan.maximumfitness.common.data.ErrorType
 import com.syhan.maximumfitness.common.data.NetworkRequestUiState
+import com.syhan.maximumfitness.common.data.setGone
+import com.syhan.maximumfitness.common.data.setVisible
 import com.syhan.maximumfitness.databinding.FragmentWorkoutListBinding
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -40,17 +43,33 @@ class WorkoutListFragment : Fragment() {
         setupRecyclerView()
         submitDataToRecyclerView()
 
-        viewLifecycleOwner.lifecycleScope.launch {
-            viewModel.networkUiState.collect { uiState ->
-                when (uiState) {
-                    NetworkRequestUiState.Loading -> {
-                        Log.d(TAG, "onViewCreated: loading")
-                    }
-                    is NetworkRequestUiState.Error -> {
-                        Log.d(TAG, "onViewCreated: error ${uiState.type}")
-                    }
-                    NetworkRequestUiState.Success -> {
-                        Log.d(TAG, "onViewCreated: success")
+        binding.apply {
+            viewLifecycleOwner.lifecycleScope.launch {
+                viewModel.networkUiState.collect { uiState ->
+                    when (uiState) {
+                        NetworkRequestUiState.Loading -> {
+                            progressIndicator.setVisible()
+                            errorMessage.errorLayout.setGone()
+                            workoutRecyclerView.setGone()
+                        }
+
+                        is NetworkRequestUiState.Error -> {
+                            progressIndicator.setGone()
+                            errorMessage.errorLayout.setVisible()
+                            workoutRecyclerView.setGone()
+                            errorMessage.errorText.text =
+                                if (uiState.type == ErrorType.NoConnectionException) {
+                                    getString(R.string.no_connection_error)
+                                } else {
+                                    getString(R.string.unexpected_error)
+                                }
+                        }
+
+                        NetworkRequestUiState.Success -> {
+                            progressIndicator.setGone()
+                            errorMessage.errorLayout.setGone()
+                            workoutRecyclerView.setVisible()
+                        }
                     }
                 }
             }
