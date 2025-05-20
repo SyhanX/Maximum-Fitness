@@ -9,7 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.syhan.maximumfitness.common.domain.NetworkRequestUiState
+import com.syhan.maximumfitness.common.data.NetworkRequestUiState
 import com.syhan.maximumfitness.databinding.FragmentWorkoutListBinding
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel

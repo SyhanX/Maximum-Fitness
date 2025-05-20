@@ -1,4 +1,4 @@
-package com.syhan.maximumfitness.common.domain
+package com.syhan.maximumfitness.common.data
 
 import android.util.Log
 import kotlinx.coroutines.flow.MutableStateFlow
