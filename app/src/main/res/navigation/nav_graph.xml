@@ -13,7 +13,11 @@
 
         <action
             android:id="@+id/action_WorkoutListFragment_to_WorkoutDetailsFragment"
-            app:destination="@id/WorkoutDetailsFragment" />
+            app:destination="@id/WorkoutDetailsFragment"
+            app:exitAnim="@anim/fade_out"
+            app:enterAnim="@anim/slide_in_vertically"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/slide_out_vertically"/>
     </fragment>
     <fragment
         android:id="@+id/WorkoutDetailsFragment"
