@@ -2,6 +2,7 @@ package com.syhan.maximumfitness.common.di
 
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
 import com.syhan.maximumfitness.common.data.remote.WorkoutApi
+import com.syhan.maximumfitness.common.di.RetrofitConstants.BASE_URL
 import com.syhan.maximumfitness.feature_workouts.data.repository.WorkoutRepositoryImpl
 import com.syhan.maximumfitness.feature_workouts.domain.repository.WorkoutRepository
 import com.syhan.maximumfitness.feature_workouts.presentation.workout_details.WorkoutDetailsViewModel
@@ -24,7 +25,7 @@ val appModule = module {
             .build()
 
         Retrofit.Builder()
-            .baseUrl("https://ref.test.kolsa.ru/")
+            .baseUrl(BASE_URL)
             .client(client)
             .addConverterFactory(Json.asConverterFactory("application/json".toMediaType()))
             .build()
@@ -40,4 +41,8 @@ val appModule = module {
     }
 
     viewModelOf(::WorkoutDetailsViewModel)
+}
+
+object RetrofitConstants {
+    const val BASE_URL = "https://ref.test.kolsa.ru/"
 }
