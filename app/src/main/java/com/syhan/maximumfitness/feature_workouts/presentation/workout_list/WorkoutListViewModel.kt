@@ -3,7 +3,6 @@ package com.syhan.maximumfitness.feature_workouts.presentation.workout_list
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.syhan.maximumfitness.common.data.EmptyHttpBodyException
-import com.syhan.maximumfitness.common.data.ErrorType
 import com.syhan.maximumfitness.common.data.NetworkRequestUiState
 import com.syhan.maximumfitness.common.data.NetworkStateHandler.setError
 import com.syhan.maximumfitness.common.data.NetworkStateHandler.setLoading
@@ -15,7 +14,6 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
-import okio.IOException
 
 private const val TAG = "WorkoutListViewModel"
 
@@ -57,10 +55,8 @@ class WorkoutListViewModel(
                     }
                 )
                 _networkUiState.setSuccess()
-            } catch (e: IOException) {
-                _networkUiState.setError(ErrorType.NoConnectionException, e.message)
             } catch (e: Exception) {
-                _networkUiState.setError(ErrorType.UnexpectedHttpException, e.message)
+                _networkUiState.setError(e)
             }
         }
     }

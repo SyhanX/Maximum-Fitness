@@ -2,6 +2,7 @@ package com.syhan.maximumfitness.common.data
 
 import android.util.Log
 import kotlinx.coroutines.flow.MutableStateFlow
+import okio.IOException
 
 private const val TAG = "NetworkResponse"
 
@@ -30,8 +31,10 @@ object NetworkStateHandler {
         this.value = NetworkRequestUiState.Success
     }
 
-    fun MutableStateFlow<NetworkRequestUiState>.setError(type: ErrorType, message: String?) {
-        Log.e(TAG, message ?: "something totally unexpected occurred wow")
-        this.value = NetworkRequestUiState.Error(type)
+    fun MutableStateFlow<NetworkRequestUiState>.setError(exception: Exception) {
+        Log.e(TAG, exception.message ?: "something totally unexpected occurred wow")
+        this.value = if (exception is IOException) {
+            NetworkRequestUiState.Error(ErrorType.NoConnectionException)
+        } else NetworkRequestUiState.Error(ErrorType.UnexpectedHttpException)
     }
 }
