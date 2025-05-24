@@ -65,4 +65,8 @@ dependencies {
     implementation(libs.coil.okhttp)
 
     implementation(libs.kotlinx.serialization)
+
+    implementation(libs.androidx.media3.exoplayer)
+    implementation(libs.androidx.media3.exoplayer.dash)
+    implementation(libs.androidx.media3.exoplayer.ui)
 }
