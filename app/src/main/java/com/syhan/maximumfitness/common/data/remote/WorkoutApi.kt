@@ -13,5 +13,5 @@ interface WorkoutApi {
     suspend fun getWorkouts() : Response<List<Workout>>
 
     @GET("/get_video")
-    suspend fun getWorkoutVideo(@Query("id") id: Int) : Response<WorkoutVideo>
+    suspend fun getWorkoutVideo(@Query(value="") id: Int) : Response<WorkoutVideo>
 }
