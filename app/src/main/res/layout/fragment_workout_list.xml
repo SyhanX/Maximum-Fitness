@@ -35,7 +35,7 @@
 
         <include
             android:id="@+id/error_message"
-            layout="@layout/error_message"
+            layout="@layout/error_screen"
             android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
