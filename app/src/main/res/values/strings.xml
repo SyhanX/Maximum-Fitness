@@ -16,4 +16,5 @@
     <string name="description">Описание</string>
     <string name="video">Видео</string>
     <string name="duration_min">%1$s мин.</string>
+    <string name="workout_search">Поиск тренировок</string>
 </resources>
