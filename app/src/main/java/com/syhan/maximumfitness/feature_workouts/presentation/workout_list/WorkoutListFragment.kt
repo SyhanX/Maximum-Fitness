@@ -64,7 +64,7 @@ class WorkoutListFragment : Fragment() {
                                     getString(R.string.unexpected_error)
                                 }
                             errorMessage.retryBtn.setOnClickListener {
-                                viewModel::retryLoadingWorkoutList
+                                viewModel.retryLoadingWorkoutList()
                             }
                         }
 
