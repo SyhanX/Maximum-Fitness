@@ -97,6 +97,7 @@ class WorkoutDetailsFragment : Fragment() {
                         findNavController().navigateUp()
                     }
                     txtDescription.text = it.description
+                    if (it.description == null) descriptionCard.setGone()
                 }
             }
             viewLifecycleOwner.lifecycleScope.launch {
