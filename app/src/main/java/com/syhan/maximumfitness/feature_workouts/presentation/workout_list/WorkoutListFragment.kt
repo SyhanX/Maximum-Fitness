@@ -15,10 +15,13 @@ import com.syhan.maximumfitness.common.data.NetworkRequestUiState
 import com.syhan.maximumfitness.common.data.setGone
 import com.syhan.maximumfitness.common.data.setVisible
 import com.syhan.maximumfitness.databinding.FragmentWorkoutListBinding
+import com.syhan.maximumfitness.feature_workouts.presentation.workout_list.state.SortByType
+import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 private const val TAG = "WorkoutListFragment"
+
 class WorkoutListFragment : Fragment() {
 
     private var _binding: FragmentWorkoutListBinding? = null
@@ -56,6 +59,23 @@ class WorkoutListFragment : Fragment() {
                 searchBar.setText(textView.text.toString())
                 searchView.hide()
                 return@setOnEditorActionListener false
+            }
+            sortingMenu.setOnItemClickListener { _, _, _, id ->
+                viewModel.changeSortingType(
+                    when (id.toInt()) {
+                        1 -> SortByType.SortByExercise
+                        2 -> SortByType.SortByAether
+                        3 -> SortByType.SortByComplex
+                        else -> SortByType.SortByDefault
+                    }
+                )
+            }
+            viewLifecycleOwner.lifecycleScope.launch {
+                viewModel.listState.collectLatest {
+                    if (it.isSearching) {
+                        sortingDropdown.setGone()
+                    } else sortingDropdown.setVisible()
+                }
             }
         }
     }
@@ -108,9 +128,13 @@ class WorkoutListFragment : Fragment() {
     private fun submitDataToRecyclerView() {
         viewLifecycleOwner.lifecycleScope.launch {
             viewModel.listState.collect { state ->
-                if (!state.isSearching && state.searchResults.isEmpty()) {
-                    workoutListAdapter.submitList(state.list)
-                } else workoutListAdapter.submitList(state.searchResults)
+                workoutListAdapter.submitList(
+                    when {
+                        state.isSearching && state.searchResults.isNotEmpty() -> state.searchResults
+                        state.sortedList.isNotEmpty() -> state.sortedList
+                        else -> state.list
+                    }
+                )
             }
         }
     }

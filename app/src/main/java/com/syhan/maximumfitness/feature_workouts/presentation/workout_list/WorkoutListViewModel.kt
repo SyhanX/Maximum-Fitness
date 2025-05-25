@@ -9,6 +9,7 @@ import com.syhan.maximumfitness.common.data.NetworkStateHandler.setError
 import com.syhan.maximumfitness.common.data.NetworkStateHandler.setLoading
 import com.syhan.maximumfitness.common.data.NetworkStateHandler.setSuccess
 import com.syhan.maximumfitness.feature_workouts.domain.repository.WorkoutRepository
+import com.syhan.maximumfitness.feature_workouts.presentation.workout_list.state.SortByType
 import com.syhan.maximumfitness.feature_workouts.presentation.workout_list.state.WorkoutCardState
 import com.syhan.maximumfitness.feature_workouts.presentation.workout_list.state.WorkoutListState
 import kotlinx.coroutines.Dispatchers
@@ -35,6 +36,24 @@ class WorkoutListViewModel(
 
     fun retryLoadingWorkoutList() {
         loadWorkoutList()
+    }
+
+    fun changeSortingType(type: SortByType) {
+        _listState.value = listState.value.copy(
+            sortBy = type
+        )
+        Log.d(TAG, "changeSortingType: ${_listState.value.sortBy}")
+        sortExercisesByType()
+    }
+
+    private fun sortExercisesByType() {
+        val filteredList = listState.value.list.filter {
+            it.type == listState.value.sortBy.index
+        }
+        Log.d(TAG, "sortExercisesByType: $filteredList")
+        _listState.value = listState.value.copy(
+            sortedList = filteredList
+        )
     }
 
     private fun loadWorkoutList() {
@@ -65,8 +84,7 @@ class WorkoutListViewModel(
 
     fun onSearchTextChange(text: String) {
         _listState.value = listState.value.copy(
-            searchText = text,
-            isSearching = text.isNotBlank()
+            searchText = text.ifBlank { null }
         )
     }
 
@@ -76,7 +94,9 @@ class WorkoutListViewModel(
         }
         Log.d(TAG, "doSearch: ${searchResults.map { it.title }}")
         _listState.value = listState.value.copy(
-            searchResults = searchResults
+            searchResults = searchResults,
+            isSearching = searchResults.isNotEmpty()
         )
+        Log.d(TAG, "doSearch: ${_listState.value.isSearching}")
     }
 }

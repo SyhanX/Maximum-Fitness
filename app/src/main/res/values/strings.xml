@@ -7,9 +7,9 @@
     <string name="minute_singular_genitive_case">%1$d минуты</string>
     <string name="minutes_plural_genitive_case">%1$d минут</string>
     <string name="unknown_duration">неизвестно</string>
-    <string name="exercise_type_1">Тренировка</string>
-    <string name="exercise_type_2">Эфир</string>
-    <string name="exercise_type_3">Комплекс</string>
+    <string name="type_exercise">Тренировка</string>
+    <string name="type_aether">Эфир</string>
+    <string name="type_complex">Комплекс</string>
     <string name="update">Обновить</string>
     <string name="unexpected_error">Что-то пошло не так\n</string>
     <string name="no_connection_error">Нет интернета</string>
@@ -17,4 +17,6 @@
     <string name="video">Видео</string>
     <string name="duration_min">%1$s мин.</string>
     <string name="workout_search">Поиск тренировок</string>
+    <string name="choose_type">Тип</string>
+    <string name="by_default">По умолчанию</string>
 </resources>

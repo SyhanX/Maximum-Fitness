@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="dropdown_items">
+        <item>@string/by_default</item>
+        <item>@string/type_exercise</item>
+        <item>@string/type_aether</item>
+        <item>@string/type_complex</item>
+    </string-array>
+</resources>

@@ -10,15 +10,17 @@ data class WorkoutCardState(
     val type: Int = 1,
     val duration: Int = 0,
 ) {
-    fun doesMatchSearchQuery(query: String): Boolean {
+    fun doesMatchSearchQuery(query: String?): Boolean {
         val titleWithoutSpaces = title.replace(" ", "")
-        val matchingCombinations = listOf<String>(
+        val matchingCombinations = listOf(
             title,
             title.first().toString(),
             titleWithoutSpaces,
         )
         return matchingCombinations.any {
-            it.contains(query, ignoreCase = true)
+            query?.let {
+                it.contains(it, ignoreCase = true)
+            } ?: false
         }
     }
 }
