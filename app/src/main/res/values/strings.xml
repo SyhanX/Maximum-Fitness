@@ -13,5 +13,7 @@
     <string name="update">Обновить</string>
     <string name="unexpected_error">Что-то пошло не так\n</string>
     <string name="no_connection_error">Нет интернета</string>
-
+    <string name="description">Описание</string>
+    <string name="video">Видео</string>
+    <string name="duration_min">%1$s мин.</string>
 </resources>

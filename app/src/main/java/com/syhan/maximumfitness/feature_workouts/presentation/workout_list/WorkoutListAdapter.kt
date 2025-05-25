@@ -12,6 +12,8 @@ import com.syhan.maximumfitness.databinding.WorkoutCardBinding
 import com.syhan.maximumfitness.feature_workouts.data.WorkoutType
 import com.syhan.maximumfitness.feature_workouts.data.getMinutesDeclension
 import com.syhan.maximumfitness.feature_workouts.presentation.workout_list.state.WorkoutCardState
+import kotlinx.serialization.encodeToString
+import kotlinx.serialization.json.Json
 
 private const val TAG = "WorkoutListAdapter"
 
@@ -62,7 +64,18 @@ class WorkoutListAdapter : ListAdapter<WorkoutCardState, WorkoutListAdapter.Work
         holder.bind(item)
 
         holder.binding.root.setOnClickListener {
-            val action = WorkoutListFragmentDirections.actionWorkoutListFragmentToWorkoutDetailsFragment(item.id)
+            val action = WorkoutListFragmentDirections
+                .actionWorkoutListFragmentToWorkoutDetailsFragment(
+                    Json.encodeToString(
+                        WorkoutCardState(
+                            item.id,
+                            item.title,
+                            item.description,
+                            item.type,
+                            item.duration
+                        )
+                    )
+                )
             holder.itemView.findNavController().navigate(action)
         }
     }

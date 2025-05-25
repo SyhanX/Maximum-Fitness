@@ -29,8 +29,8 @@
             android:id="@+id/action_WorkoutDetailsFragment_to_WorkoutListFragment"
             app:destination="@id/WorkoutListFragment" />
         <argument
-            android:name="workoutId"
-            android:defaultValue="-1"
-            app:argType="integer" />
+            android:name="workoutState"
+            app:argType="string"
+            app:nullable="true" />
     </fragment>
 </navigation>
