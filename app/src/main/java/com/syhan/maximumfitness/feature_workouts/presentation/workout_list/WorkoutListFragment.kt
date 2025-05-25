@@ -39,10 +39,15 @@ class WorkoutListFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        observeNetworkState()
+    }
+
+    private fun setupUi() {
         recyclerView = binding.workoutRecyclerView
         setupRecyclerView()
         submitDataToRecyclerView()
-
+    }
+    private fun observeNetworkState() {
         binding.apply {
             viewLifecycleOwner.lifecycleScope.launch {
                 viewModel.networkUiState.collect { uiState ->
@@ -69,6 +74,7 @@ class WorkoutListFragment : Fragment() {
                         }
 
                         NetworkRequestUiState.Success -> {
+                            setupUi()
                             progressIndicator.root.setGone()
                             errorMessage.errorLayout.setGone()
                             workoutRecyclerView.setVisible()
@@ -78,8 +84,6 @@ class WorkoutListFragment : Fragment() {
             }
         }
     }
-
-
     private fun setupRecyclerView() {
         recyclerView.apply {
             adapter = workoutListAdapter
