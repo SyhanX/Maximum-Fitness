@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -46,7 +47,19 @@ class WorkoutListFragment : Fragment() {
         recyclerView = binding.workoutRecyclerView
         setupRecyclerView()
         submitDataToRecyclerView()
+        binding.apply {
+            searchView.editText.doOnTextChanged { inputText, _, _, _ ->
+                viewModel.onSearchTextChange(inputText.toString())
+            }
+            searchView.editText.setOnEditorActionListener { textView, _, _ ->
+                viewModel.doSearch()
+                searchBar.setText(textView.text.toString())
+                searchView.hide()
+                return@setOnEditorActionListener false
+            }
+        }
     }
+
     private fun observeNetworkState() {
         binding.apply {
             viewLifecycleOwner.lifecycleScope.launch {
@@ -84,6 +97,7 @@ class WorkoutListFragment : Fragment() {
             }
         }
     }
+
     private fun setupRecyclerView() {
         recyclerView.apply {
             adapter = workoutListAdapter
@@ -94,7 +108,9 @@ class WorkoutListFragment : Fragment() {
     private fun submitDataToRecyclerView() {
         viewLifecycleOwner.lifecycleScope.launch {
             viewModel.listState.collect { state ->
-                workoutListAdapter.submitList(state.list)
+                if (!state.isSearching && state.searchResults.isEmpty()) {
+                    workoutListAdapter.submitList(state.list)
+                } else workoutListAdapter.submitList(state.searchResults)
             }
         }
     }

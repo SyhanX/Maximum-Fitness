@@ -1,5 +1,6 @@
 package com.syhan.maximumfitness.feature_workouts.presentation.workout_list
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.syhan.maximumfitness.common.data.EmptyHttpBodyException
@@ -24,7 +25,8 @@ class WorkoutListViewModel(
     private val _listState = MutableStateFlow(WorkoutListState())
     val listState = _listState.asStateFlow()
 
-    private val _networkUiState = MutableStateFlow<NetworkRequestUiState>(NetworkRequestUiState.Loading)
+    private val _networkUiState =
+        MutableStateFlow<NetworkRequestUiState>(NetworkRequestUiState.Loading)
     val networkUiState = _networkUiState.asStateFlow()
 
     init {
@@ -59,5 +61,22 @@ class WorkoutListViewModel(
                 _networkUiState.setError(e)
             }
         }
+    }
+
+    fun onSearchTextChange(text: String) {
+        _listState.value = listState.value.copy(
+            searchText = text,
+            isSearching = text.isNotBlank()
+        )
+    }
+
+    fun doSearch() {
+        val searchResults: List<WorkoutCardState> = _listState.value.list.filter {
+            it.doesMatchSearchQuery(listState.value.searchText)
+        }
+        Log.d(TAG, "doSearch: ${searchResults.map { it.title }}")
+        _listState.value = listState.value.copy(
+            searchResults = searchResults
+        )
     }
 }
