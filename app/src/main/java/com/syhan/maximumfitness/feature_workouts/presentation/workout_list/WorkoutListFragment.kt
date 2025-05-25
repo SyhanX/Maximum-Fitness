@@ -48,13 +48,13 @@ class WorkoutListFragment : Fragment() {
                 viewModel.networkUiState.collect { uiState ->
                     when (uiState) {
                         NetworkRequestUiState.Loading -> {
-                            progressIndicator.setVisible()
+                            progressIndicator.root.setVisible()
                             errorMessage.errorLayout.setGone()
                             workoutRecyclerView.setGone()
                         }
 
                         is NetworkRequestUiState.Error -> {
-                            progressIndicator.setGone()
+                            progressIndicator.root.setGone()
                             errorMessage.errorLayout.setVisible()
                             workoutRecyclerView.setGone()
                             errorMessage.errorText.text =
@@ -69,7 +69,7 @@ class WorkoutListFragment : Fragment() {
                         }
 
                         NetworkRequestUiState.Success -> {
-                            progressIndicator.setGone()
+                            progressIndicator.root.setGone()
                             errorMessage.errorLayout.setGone()
                             workoutRecyclerView.setVisible()
                         }
