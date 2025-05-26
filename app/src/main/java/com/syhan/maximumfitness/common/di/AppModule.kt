@@ -11,7 +11,6 @@ import kotlinx.serialization.json.Json
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
-import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.androidx.viewmodel.dsl.viewModelOf
 import org.koin.dsl.module
 import retrofit2.Retrofit
@@ -36,10 +35,7 @@ val appModule = module {
         WorkoutRepositoryImpl(get())
     }
 
-    viewModel {
-        WorkoutListViewModel(get())
-    }
-
+    viewModelOf(::WorkoutListViewModel)
     viewModelOf(::WorkoutDetailsViewModel)
 }
 
