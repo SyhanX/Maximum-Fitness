@@ -35,7 +35,7 @@ object WorkoutDurationSerializer : KSerializer<Int?> {
     }
 
     override fun deserialize(decoder: Decoder): Int? {
-        var duration: Int? = null
+        val duration: Int?
 
         val jsonDecoder = decoder as? JsonDecoder ?: throw SerializationException(
             "This serializer only works with JSON :3"
@@ -45,7 +45,6 @@ object WorkoutDurationSerializer : KSerializer<Int?> {
         duration = try {
             if (element is JsonPrimitive) {
                 element.content
-                    .toString()
                     .toInt()
             } else throw SerializationException("Invalid value $element")
         } catch (e: Exception) {
