@@ -16,7 +16,6 @@ import com.syhan.maximumfitness.common.data.NetworkUiState
 import com.syhan.maximumfitness.common.data.setGone
 import com.syhan.maximumfitness.common.data.setVisible
 import com.syhan.maximumfitness.databinding.FragmentWorkoutListBinding
-import com.syhan.maximumfitness.feature_workouts.presentation.workout_list.state.SortByType
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel

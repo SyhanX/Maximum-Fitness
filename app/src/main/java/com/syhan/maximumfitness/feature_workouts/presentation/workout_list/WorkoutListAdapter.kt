@@ -11,20 +11,20 @@ import com.syhan.maximumfitness.R
 import com.syhan.maximumfitness.databinding.WorkoutCardBinding
 import com.syhan.maximumfitness.feature_workouts.data.WorkoutType
 import com.syhan.maximumfitness.feature_workouts.data.getMinutesDeclension
-import com.syhan.maximumfitness.feature_workouts.presentation.workout_list.state.WorkoutCardState
+import com.syhan.maximumfitness.feature_workouts.presentation.WorkoutState
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 
 private const val TAG = "WorkoutListAdapter"
 
-class WorkoutListAdapter : ListAdapter<WorkoutCardState, WorkoutListAdapter.WorkoutStateViewHolder>(
+class WorkoutListAdapter : ListAdapter<WorkoutState, WorkoutListAdapter.WorkoutStateViewHolder>(
     WorkoutListDiffCallback
 ) {
 
     inner class WorkoutStateViewHolder(val binding: WorkoutCardBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(item: WorkoutCardState) {
+        fun bind(item: WorkoutState) {
             val currentTypeIndex = WorkoutType.entries[item.type -1]
             binding.apply {
                 val resources = root.resources
@@ -67,7 +67,7 @@ class WorkoutListAdapter : ListAdapter<WorkoutCardState, WorkoutListAdapter.Work
             val action = WorkoutListFragmentDirections
                 .actionWorkoutListFragmentToWorkoutDetailsFragment(
                     Json.encodeToString(
-                        WorkoutCardState(
+                        WorkoutState(
                             item.id,
                             item.title,
                             item.description,
@@ -81,14 +81,14 @@ class WorkoutListAdapter : ListAdapter<WorkoutCardState, WorkoutListAdapter.Work
     }
 }
 
-private object WorkoutListDiffCallback : DiffUtil.ItemCallback<WorkoutCardState>() {
+private object WorkoutListDiffCallback : DiffUtil.ItemCallback<WorkoutState>() {
     override fun areItemsTheSame(
-        oldItem: WorkoutCardState,
-        newItem: WorkoutCardState
+        oldItem: WorkoutState,
+        newItem: WorkoutState
     ): Boolean = oldItem.id == newItem.id
 
     override fun areContentsTheSame(
-        oldItem: WorkoutCardState,
-        newItem: WorkoutCardState
+        oldItem: WorkoutState,
+        newItem: WorkoutState
     ): Boolean = oldItem.hashCode() == newItem.hashCode() && oldItem == newItem
 }

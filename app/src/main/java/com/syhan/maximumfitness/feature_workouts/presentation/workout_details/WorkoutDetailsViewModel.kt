@@ -9,7 +9,7 @@ import com.syhan.maximumfitness.common.data.NetworkStateHandler.setError
 import com.syhan.maximumfitness.common.data.NetworkStateHandler.setLoading
 import com.syhan.maximumfitness.common.data.NetworkStateHandler.setSuccess
 import com.syhan.maximumfitness.feature_workouts.domain.repository.WorkoutRepository
-import com.syhan.maximumfitness.feature_workouts.presentation.workout_list.state.WorkoutCardState
+import com.syhan.maximumfitness.feature_workouts.presentation.WorkoutState
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
@@ -22,7 +22,7 @@ class WorkoutDetailsViewModel(
     savedStateHandle: SavedStateHandle,
 ) : ViewModel() {
 
-    private val _detailsState = MutableStateFlow(WorkoutCardState())
+    private val _detailsState = MutableStateFlow(WorkoutState())
     val detailsState = _detailsState.asStateFlow()
 
     private val _videoState = MutableStateFlow(WorkoutVideoState())
@@ -41,8 +41,8 @@ class WorkoutDetailsViewModel(
 
     private fun getWorkoutDetails() {
         val decoded = args?.let {
-            Json.decodeFromString<WorkoutCardState>(it)
-        } ?: WorkoutCardState()
+            Json.decodeFromString<WorkoutState>(it)
+        } ?: WorkoutState()
         _detailsState.value = detailsState.value.copy(
             id = decoded.id,
             title = decoded.title,

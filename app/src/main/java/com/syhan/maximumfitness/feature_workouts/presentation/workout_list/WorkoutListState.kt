@@ -1,9 +1,11 @@
-package com.syhan.maximumfitness.feature_workouts.presentation.workout_list.state
+package com.syhan.maximumfitness.feature_workouts.presentation.workout_list
+
+import com.syhan.maximumfitness.feature_workouts.presentation.WorkoutState
 
 data class WorkoutListState(
-    val list: List<WorkoutCardState> = emptyList(),
-    val searchResults: List<WorkoutCardState> = emptyList(),
-    val sortedList: List<WorkoutCardState> = emptyList(),
+    val list: List<WorkoutState> = emptyList(),
+    val searchResults: List<WorkoutState> = emptyList(),
+    val sortedList: List<WorkoutState> = emptyList(),
     val isSearching: Boolean = false,
     val searchText: String? = null,
     val sortBy: SortByType = SortByType.SortByDefault

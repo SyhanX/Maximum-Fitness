@@ -8,9 +8,7 @@ import com.syhan.maximumfitness.common.data.NetworkStateHandler.setLoading
 import com.syhan.maximumfitness.common.data.NetworkStateHandler.setSuccess
 import com.syhan.maximumfitness.common.data.NetworkUiState
 import com.syhan.maximumfitness.feature_workouts.domain.repository.WorkoutRepository
-import com.syhan.maximumfitness.feature_workouts.presentation.workout_list.state.SortByType
-import com.syhan.maximumfitness.feature_workouts.presentation.workout_list.state.WorkoutCardState
-import com.syhan.maximumfitness.feature_workouts.presentation.workout_list.state.WorkoutListState
+import com.syhan.maximumfitness.feature_workouts.presentation.WorkoutState
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -63,7 +61,7 @@ class WorkoutListViewModel(
 
                 _listState.value = listState.value.copy(
                     list = body.map {
-                        WorkoutCardState(
+                        WorkoutState(
                             id = it.id,
                             title = it.title,
                             description = it.description,
@@ -86,7 +84,7 @@ class WorkoutListViewModel(
     }
 
     fun doSearch() {
-        val searchResults: List<WorkoutCardState> = _listState.value.list.filter {
+        val searchResults: List<WorkoutState> = _listState.value.list.filter {
             it.doesMatchSearchQuery(listState.value.searchText)
         }
         _listState.value = listState.value.copy(

@@ -1,9 +1,9 @@
-package com.syhan.maximumfitness.feature_workouts.presentation.workout_list.state
+package com.syhan.maximumfitness.feature_workouts.presentation
 
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class WorkoutCardState(
+data class WorkoutState(
     val id: Int = -1,
     val title: String = "",
     val description: String? = null,
