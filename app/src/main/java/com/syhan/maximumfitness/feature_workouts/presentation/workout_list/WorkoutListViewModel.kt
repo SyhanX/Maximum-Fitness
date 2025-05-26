@@ -4,7 +4,7 @@ import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.syhan.maximumfitness.common.data.EmptyHttpBodyException
-import com.syhan.maximumfitness.common.data.NetworkRequestUiState
+import com.syhan.maximumfitness.common.data.NetworkUiState
 import com.syhan.maximumfitness.common.data.NetworkStateHandler.setError
 import com.syhan.maximumfitness.common.data.NetworkStateHandler.setLoading
 import com.syhan.maximumfitness.common.data.NetworkStateHandler.setSuccess
@@ -27,7 +27,7 @@ class WorkoutListViewModel(
     val listState = _listState.asStateFlow()
 
     private val _networkUiState =
-        MutableStateFlow<NetworkRequestUiState>(NetworkRequestUiState.Loading)
+        MutableStateFlow<NetworkUiState>(NetworkUiState.Loading)
     val networkUiState = _networkUiState.asStateFlow()
 
     init {

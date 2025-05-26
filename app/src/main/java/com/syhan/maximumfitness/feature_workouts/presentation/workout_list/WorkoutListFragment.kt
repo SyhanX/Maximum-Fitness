@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.syhan.maximumfitness.R
 import com.syhan.maximumfitness.common.data.ErrorType
-import com.syhan.maximumfitness.common.data.NetworkRequestUiState
+import com.syhan.maximumfitness.common.data.NetworkUiState
 import com.syhan.maximumfitness.common.data.setGone
 import com.syhan.maximumfitness.common.data.setVisible
 import com.syhan.maximumfitness.databinding.FragmentWorkoutListBinding
@@ -85,18 +85,18 @@ class WorkoutListFragment : Fragment() {
             viewLifecycleOwner.lifecycleScope.launch {
                 viewModel.networkUiState.collect { uiState ->
                     when (uiState) {
-                        NetworkRequestUiState.Loading -> {
+                        NetworkUiState.Loading -> {
                             progressIndicator.root.setVisible()
                             errorMessage.errorLayout.setGone()
                             workoutRecyclerView.setGone()
                         }
 
-                        is NetworkRequestUiState.Error -> {
+                        is NetworkUiState.Error -> {
                             progressIndicator.root.setGone()
                             errorMessage.errorLayout.setVisible()
                             workoutRecyclerView.setGone()
                             errorMessage.errorText.text =
-                                if (uiState.type == ErrorType.NoConnectionException) {
+                                if (uiState.type == ErrorType.ConnectionError) {
                                     getString(R.string.no_connection_error)
                                 } else {
                                     getString(R.string.unexpected_error)
@@ -106,7 +106,7 @@ class WorkoutListFragment : Fragment() {
                             }
                         }
 
-                        NetworkRequestUiState.Success -> {
+                        NetworkUiState.Success -> {
                             setupUi()
                             progressIndicator.root.setGone()
                             errorMessage.errorLayout.setGone()

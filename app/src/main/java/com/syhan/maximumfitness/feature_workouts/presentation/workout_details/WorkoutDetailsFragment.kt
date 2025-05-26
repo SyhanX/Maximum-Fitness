@@ -13,7 +13,7 @@ import androidx.media3.exoplayer.ExoPlayer
 import androidx.navigation.fragment.findNavController
 import com.syhan.maximumfitness.R
 import com.syhan.maximumfitness.common.data.ErrorType
-import com.syhan.maximumfitness.common.data.NetworkRequestUiState
+import com.syhan.maximumfitness.common.data.NetworkUiState
 import com.syhan.maximumfitness.common.data.setGone
 import com.syhan.maximumfitness.common.data.setVisible
 import com.syhan.maximumfitness.common.di.RetrofitConstants.BASE_URL
@@ -59,10 +59,10 @@ class WorkoutDetailsFragment : Fragment() {
         viewLifecycleOwner.lifecycleScope.launch {
             viewModel.networkState.collectLatest { networkState ->
                 when (networkState) {
-                    is NetworkRequestUiState.Error -> {
+                    is NetworkUiState.Error -> {
                         binding.errorLayout.root.setVisible()
                         binding.errorLayout.errorText.text =
-                            if (networkState.type == ErrorType.NoConnectionException) {
+                            if (networkState.type == ErrorType.ConnectionError) {
                                 getString(R.string.no_connection_error)
                             } else {
                                 getString(R.string.unexpected_error)
@@ -71,13 +71,13 @@ class WorkoutDetailsFragment : Fragment() {
                         binding.detailsLayout.setGone()
                     }
 
-                    NetworkRequestUiState.Loading -> {
+                    NetworkUiState.Loading -> {
                         binding.loadingLayout.root.setVisible()
                         binding.detailsLayout.setGone()
                         binding.errorLayout.root.setGone()
                     }
 
-                    NetworkRequestUiState.Success -> {
+                    NetworkUiState.Success -> {
                         binding.errorLayout.root.setGone()
                         binding.loadingLayout.root.setGone()
                         binding.detailsLayout.setVisible()
