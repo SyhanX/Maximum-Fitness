@@ -1,13 +1,12 @@
 package com.syhan.maximumfitness.feature_workouts.presentation.workout_list
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.syhan.maximumfitness.common.data.EmptyHttpBodyException
-import com.syhan.maximumfitness.common.data.NetworkUiState
 import com.syhan.maximumfitness.common.data.NetworkStateHandler.setError
 import com.syhan.maximumfitness.common.data.NetworkStateHandler.setLoading
 import com.syhan.maximumfitness.common.data.NetworkStateHandler.setSuccess
+import com.syhan.maximumfitness.common.data.NetworkUiState
 import com.syhan.maximumfitness.feature_workouts.domain.repository.WorkoutRepository
 import com.syhan.maximumfitness.feature_workouts.presentation.workout_list.state.SortByType
 import com.syhan.maximumfitness.feature_workouts.presentation.workout_list.state.WorkoutCardState
@@ -42,7 +41,6 @@ class WorkoutListViewModel(
         _listState.value = listState.value.copy(
             sortBy = type
         )
-        Log.d(TAG, "changeSortingType: ${_listState.value.sortBy}")
         sortExercisesByType()
     }
 
@@ -50,7 +48,6 @@ class WorkoutListViewModel(
         val filteredList = listState.value.list.filter {
             it.type == listState.value.sortBy.index
         }
-        Log.d(TAG, "sortExercisesByType: $filteredList")
         _listState.value = listState.value.copy(
             sortedList = filteredList
         )
@@ -92,11 +89,9 @@ class WorkoutListViewModel(
         val searchResults: List<WorkoutCardState> = _listState.value.list.filter {
             it.doesMatchSearchQuery(listState.value.searchText)
         }
-        Log.d(TAG, "doSearch: ${searchResults.map { it.title }}")
         _listState.value = listState.value.copy(
             searchResults = searchResults,
             isSearching = searchResults.isNotEmpty()
         )
-        Log.d(TAG, "doSearch: ${_listState.value.isSearching}")
     }
 }
